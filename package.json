@@ -1,0 +1,51 @@
+{
+  "name": "social-anxiety-journal",
+  "version": "1.0.0",
+  "description": "Web application for tracking interactions and possible thinking traps",
+  "main": "app.js",
+  "author": "Brandon Mellus",
+  "license": "MIT",
+  "scripts": {
+    "start": "node app.js",
+    "start:dev": "gulp"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "dotenv": "^6.0.0",
+    "email-validator": "^2.0.4",
+    "express": "^4.16.3",
+    "gulp-react": "^3.1.0",
+    "helmet": "^3.13.0",
+    "mongoose": "^5.3.0",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
+    "react-redux": "^5.0.7",
+    "redux": "^4.0.0",
+    "validate-password": "^1.0.4"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.1.0",
+    "browser-sync": "^2.24.7",
+    "eslint": "^5.3.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.11.0",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^6.0.0",
+    "gulp-babel": "^8.0.0",
+    "gulp-csso": "^3.0.1",
+    "gulp-eslint": "^5.0.0",
+    "gulp-load-plugins": "^1.5.0",
+    "gulp-nodemon": "^2.2.1",
+    "gulp-sass": "^4.0.1",
+    "gulp-sass-bulk-import": "^1.0.1",
+    "gulp-uglify": "^3.0.1",
+    "gulp-uglifycss": "^1.1.0",
+    "pump": "^3.0.0"
+  }
+}

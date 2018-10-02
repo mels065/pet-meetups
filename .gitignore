@@ -1,0 +1,4 @@
+.env
+node_modules/
+*data-template.xls*
+yarn-error.log
