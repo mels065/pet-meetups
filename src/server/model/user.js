@@ -2,45 +2,45 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const emailValidator = require('email-validator');
 
-const { ERROR_MESSAGES, REGEX_PATTERNS, RANGES } = require('../../../config');
+const {
+  ERROR_MESSAGES,
+  REGEX_PATTERNS,
+  RANGES,
+  validator,
+} = require('../../../config');
 
 const UserSchema = mongoose.Schema({
   username: {
     type: String,
-    required: [true, ERROR_MESSAGES.NO_USERNAME],
-    minLength: [RANGES.USERNAME.MIN, ERROR_MESSAGES.USERNAME_RANGE],
-    maxLength: [RANGES.USERNAME.MAX, ERROR_MESSAGES.USERNAME_RANGE],
-    match: [REGEX_PATTERNS.ILLEGAL_CHARS, ERROR_MESSAGES.USERNAME.INVALID],
+    required: [true, ERROR_MESSAGES.USER.NO_USERNAME],
+    minLength: [RANGES.USER.USERNAME.MIN, ERROR_MESSAGES.USER.USERNAME_RANGE],
+    maxLength: [RANGES.USER.USERNAME.MAX, ERROR_MESSAGES.USER.USERNAME_RANGE],
+    match: [REGEX_PATTERNS.ILLEGAL_CHARS, ERROR_MESSAGES.USER.USERNAME.INVALID],
   },
   email: {
     type: String,
-    required: [true, ERROR_MESSAGES.NO_EMAIL],
+    required: [true, ERROR_MESSAGES.USER.NO_EMAIL],
     validate: {
       validator: emailValidator.validate,
-      message: ERROR_MESSAGES.INVALID_EMAIL,
+      message: ERROR_MESSAGES.USER.INVALID_EMAIL,
     },
   },
   password: {
     type: String,
     validate: {
-      validator: password => (
-        /[A-Z]/.test(password)
-        && /[a-z]/.test(password)
-        && /\d/.test(password)
-        && REGEX_PATTERNS.ILLEGAL_CHARS.test(password)
-      ),
+      validator: validator.validatePassword,
       message: '',
     },
-    required: [true, ERROR_MESSAGES.NO_PASSWORD],
+    required: [true, ERROR_MESSAGES.USER.NO_PASSWORD],
   },
   age: {
-    type: [Number, ERROR_MESSAGES.AGE.TYPE],
-    min: [RANGES.AGE.MIN, ERROR_MESSAGES.AGE.RANGE],
-    max: [RANGES.AGE.MAX, ERROR_MESSAGES.AGE.RANGE],
+    type: Number,
+    min: [RANGES.USER.AGE.MIN, ERROR_MESSAGES.USER.AGE.RANGE],
+    max: [RANGES.USER.AGE.MAX, ERROR_MESSAGES.USER.AGE.RANGE],
   },
   zipcode: {
     type: String,
-    match: [REGEX_PATTERNS.ZIPCODE, ERROR_MESSAGES.ZIPCODE.INVALID],
+    match: [REGEX_PATTERNS.USER.ZIPCODE, ERROR_MESSAGES.USER.ZIPCODE.INVALID],
   },
 });
 
