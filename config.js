@@ -46,6 +46,7 @@ module.exports = {
         NONE_PROVIDED: 'No password was given',
         INVALID: `Password must contain at least 1 lowercase and uppercase letter, number, and special character (not including [${ILLEGAL_CHAR_STR_PATTERN}])`,
         RANGE: `Password must be between ${RANGES.PASSWORD.MIN} and ${RANGES.PASSWORD.MAX}`,
+        NO_MATCH: 'Password and repeat password must match',
       },
       AGE: {
         TYPE: 'Age must be a number',

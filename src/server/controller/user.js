@@ -3,20 +3,6 @@ const User = require('../model/user');
 const { ERROR_MESSAGES } = require('../../../config');
 
 module.exports = {
-  createUser: async (payload) => {
-    try {
-      if ((await User.findOne({ username: payload.username }))) {
-        throw new Error(ERROR_MESSAGES.USER.USERNAME.ALREADY_EXISTS);
-      }
-      if ((await User.findOne({ email: payload.email }))) {
-        throw new Error(ERROR_MESSAGES.USER.EMAIL.ALREADY_EXISTS);
-      }
-      return await User.create(payload);
-    } catch (err) {
-      throw err;
-    }
-  },
-
   getUsers: async (includePassword) => {
     try {
       return (await User.find({})).select(
@@ -27,11 +13,17 @@ module.exports = {
     }
   },
 
-  getUserById: async (id, includePassword) => (await User.findOne({ id })).select(`${includePassword ? '' : '-password'}`),
+  getUserById: async (_id) => {
+    try {
+      return await User.findOne({ _id })
+    } catch (err) {
+      throw err;
+    }
+  },
 
   getUserByUsername: async (username, includePassword) => {},
 
-  updateUser: async (id, payload) => User.update({ id }, payload),
+  updateUser: async (_id, payload) => User.update({ _id }, payload),
 
-  destroyUser: async id => User.deleteOne({ id }),
+  destroyUser: async _id => User.deleteOne({ _id }),
 };

@@ -8,6 +8,7 @@ const path = require('path');
 require('dotenv').config();
 require('./src/server/auth/jwt')(passport);
 
+mongoose.Promise = global.Promise;
 (async () => {
   try {
     await mongoose.connect(
