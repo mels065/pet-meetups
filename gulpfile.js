@@ -22,7 +22,6 @@ gulp.task('nodemon', (cb) => {
   return plugins.nodemon({
     script: 'app.js',
     env: { NODE_ENV: 'development' },
-    tasks: ['js', 'scss'],
   })
     .on('start', () => {
       if (!started) {
@@ -55,7 +54,11 @@ gulp.task('react', () => (
 
 gulp.task('js', ['eslint', 'react']);
 
-gulp.task('scss', () => (
+gulp.task('watch-js', () => {
+  gulp.watch(['app.js', `${SRC_DIR}/**/*.js`], ['js']);
+});
+
+gulp.task('sass', () => (
   pump([
     gulp.src(`${CLIENT_SRC}/sass/*.scss`),
     plugins.sassBulkImport(),
@@ -70,4 +73,10 @@ gulp.task('scss', () => (
     })
 ));
 
-gulp.task('default', ['js', 'scss', 'browser-sync']);
+gulp.task('watch-sass', () => {
+  gulp.watch(`${CLIENT_SRC}/sass/**/*.scss`, ['sass']);
+});
+
+gulp.task('default', ['js', 'scss', 'browser-sync', 'watch-sass', 'watch-js']);
+
+gulp.task('dev-server', ['js', 'nodemon', 'watch-js']);
