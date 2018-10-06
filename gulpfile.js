@@ -21,7 +21,6 @@ gulp.task('nodemon', (cb) => {
   let started = false;
   return plugins.nodemon({
     script: 'app.js',
-    ext: 'js scss',
     env: { NODE_ENV: 'development' },
     tasks: ['js', 'scss'],
   })

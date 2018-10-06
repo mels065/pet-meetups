@@ -3,12 +3,10 @@ const { ObjectId } = require('mongoose').Schema.Types;
 const bcrypt = require('bcryptjs');
 const emailValidator = require('email-validator');
 
-const {
-  ERROR_MESSAGES,
-  validator,
-} = require('../../../config');
+const { ERROR_MESSAGES } = require('../../../config');
+const { validator } = require('../../../utils');
 
-const AccountSchema = {
+const AccountSchema = mongoose.Schema({
   email: {
     type: String,
     required: [true, ERROR_MESSAGES.USER.NO_EMAIL],
@@ -21,7 +19,7 @@ const AccountSchema = {
     type: String,
     validate: {
       validator: validator.validatePassword,
-      message: '',
+      message: ERROR_MESSAGES.USER.PASSWORD.INVALID,
     },
     required: [true, ERROR_MESSAGES.USER.NO_PASSWORD],
   },
@@ -29,7 +27,7 @@ const AccountSchema = {
     type: ObjectId,
     ref: 'User',
   },
-};
+});
 
 AccountSchema.pre('save', async function preSave(next) {
   try {
@@ -50,7 +48,7 @@ AccountSchema.pre('save', async function preSave(next) {
   }
 });
 
-AccountSchema.methods('comparePasswords', async function compare(password) {
+AccountSchema.method('comparePasswords', async function compare(password) {
   try {
     return await new Promise((resolve, reject) => {
       bcrypt.compare(password, this.password, (err, same) => {

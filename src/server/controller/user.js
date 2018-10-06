@@ -1,13 +1,9 @@
 const User = require('../model/user');
 
-const { ERROR_MESSAGES } = require('../../../config');
-
 module.exports = {
-  getUsers: async (includePassword) => {
+  getUsers: async () => {
     try {
-      return (await User.find({})).select(
-        includePassword ? '' : '-password',
-      );
+      return await User.find({});
     } catch (err) {
       throw err;
     }
@@ -15,13 +11,13 @@ module.exports = {
 
   getUserById: async (_id) => {
     try {
-      return await User.findOne({ _id })
+      return await User.findOne({ _id });
     } catch (err) {
       throw err;
     }
   },
 
-  getUserByUsername: async (username, includePassword) => {},
+  // getUserByUsername: async (username) => {},
 
   updateUser: async (_id, payload) => User.update({ _id }, payload),
 
