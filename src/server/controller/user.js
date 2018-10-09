@@ -11,7 +11,7 @@ module.exports = {
 
   getUserById: async (_id) => {
     try {
-      return await User.findOne({ _id });
+      return await User.findById(_id);
     } catch (err) {
       throw err;
     }

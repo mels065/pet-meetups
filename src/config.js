@@ -49,7 +49,7 @@ const ERROR_MESSAGES = {
   USER: {
     GENERAL: {
       NOT_FOUND: 'Could not find account associated with this email.',
-    }
+    },
     USERNAME: {
       ALREADY_EXISTS: 'User already exists',
       NONE_PROVIDED: 'No username provided',
@@ -66,6 +66,7 @@ const ERROR_MESSAGES = {
       INVALID: `Password must contain at least 1 lowercase and uppercase letter, number, and special character (not including [${ILLEGAL_CHAR_STR_PATTERN}])`,
       RANGE: `Password must be between ${BOUNDARIES.USER.PASSWORD.MIN} and ${BOUNDARIES.USER.PASSWORD.MAX}`,
       NO_MATCH: 'Password and repeat password must match',
+      WRONG_PASSWORD: 'Password is wrong',
     },
     BIRTHDAY: {
       NONE_PROVIDED: '',

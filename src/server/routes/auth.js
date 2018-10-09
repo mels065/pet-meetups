@@ -24,13 +24,15 @@ module.exports = () => {
     try {
       const { payload: { email, password } } = req.body;
 
-      if (!email) throw new Error('Please enter an email.');
-      if (!password) throw new Error('Please enter a password');
+      if (!email) throw new Error(ERROR_MESSAGES.USER.EMAIL.NONE_PROVIDED);
+      if (!password) throw new Error(ERROR_MESSAGES.USER.PASSWORD.NONE_PROVIDED);
 
-      const account = await AccountController.getAccontByEmail(email);
+      const account = await AccountController.getAccountByEmail(email);
 
       if (!account) throw new Error(ERROR_MESSAGES.USER.GENERAL.NOT_FOUND);
-      if (!account.comparePassword(password)) throw new Error('Password does not match');
+      if (!account.comparePasswords(password)) {
+        throw new Error(ERROR_MESSAGES.USER.PASSWORD.WRONG_PASSWORD);
+      }
 
       const user = await UserController.getUserById(account.user);
       const token = jwt.sign(user.toJSON(), process.env.JWT_SECRET);
