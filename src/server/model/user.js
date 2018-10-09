@@ -1,32 +1,60 @@
 const mongoose = require('mongoose');
+const _ = require('lodash');
 
 const {
   ERROR_MESSAGES,
   REGEX_PATTERNS,
-  RANGES,
-} = require('../../../config');
+  VALUES,
+  BOUNDARIES,
+} = require('../../config');
+const { validator } = require('../../utils');
 
 const UserSchema = mongoose.Schema({
   username: {
     type: String,
     required: [true, ERROR_MESSAGES.USER.USERNAME.NO_USERNAME],
-    minLength: [RANGES.USER.USERNAME.MIN, ERROR_MESSAGES.USER.USERNAME_RANGE],
-    maxLength: [RANGES.USER.USERNAME.MAX, ERROR_MESSAGES.USER.USERNAME_RANGE],
+    minLength: [BOUNDARIES.USER.USERNAME.MIN, ERROR_MESSAGES.USER.USERNAME_RANGE],
+    maxLength: [BOUNDARIES.USER.USERNAME.MAX, ERROR_MESSAGES.USER.USERNAME_RANGE],
     validate: {
-      validator: username => !REGEX_PATTERNS.ILLEGAL_CHARS.test(username),
+      validator: validator.validateUsername,
       message: ERROR_MESSAGES.USER.USERNAME.INVALID,
     },
+  },
+  gender: {
+    type: String,
+    default: _.last(VALUES.USER.GENDER),
+  },
+  genderExplanation: {
+    type: String,
+    default: '',
   },
   birthday: {
     type: Date,
     validate: {
-      validator: date => date >= RANGES.USER.BIRTHDAY.MIN && date <= new Date(),
-      message: ERROR_MESSAGES.USER.BIRTHDAY.RANGE,
+      validator: validator.isOldEnough,
+      message: ERROR_MESSAGES.USER.BIRTHDAY.INVALID,
     },
+    required: [true, ERROR_MESSAGES.USER.BIRTHDAY.NONE_PROVIDED],
+  },
+  sexualOrientation: {
+    type: String,
+    default: _.last(VALUES.USER.SEXUAL_ORIENTATION),
+  },
+  sexualOrientationExplanation: {
+    type: String,
+    default: '',
+  },
+  showGender: {
+    type: Boolean,
+    default: true,
+  },
+  showAge: {
+    type: Boolean,
+    default: true,
   },
   zipcode: {
     type: String,
-    required: [true, ERROR_MESSAGES.USER.ZIPCODE],
+    required: [true, ERROR_MESSAGES.USER.ZIPCODE.NONE_PROVIDED],
     match: [REGEX_PATTERNS.USER.ZIPCODE, ERROR_MESSAGES.USER.ZIPCODE.INVALID],
   },
   createdOn: {
