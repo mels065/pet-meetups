@@ -34,4 +34,28 @@ module.exports = {
       throw err;
     }
   },
+  getAccountByUser: async (user) => {
+    try {
+      return await Account.findOne({ user });
+    } catch (err) {
+      throw err;
+    }
+  },
+  // Search is done by User ID
+  updateAccountPassword: async (user, password) => {
+    try {
+      await Account.updateOne({ user }, { password });
+    } catch (err) {
+      throw err;
+    }
+  },
+  // Search is done by User ID
+  destroyAccount: async (user) => {
+    try {
+      await Account.deleteOne({ user });
+      await User.deleteOne({ _id: user });
+    } catch (err) {
+      throw err;
+    }
+  },
 };

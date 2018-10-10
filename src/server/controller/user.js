@@ -17,9 +17,19 @@ module.exports = {
     }
   },
 
-  // getUserByUsername: async (username) => {},
+  getUserByUsername: async (username) => {
+    try {
+      return await User.findOne({ username });
+    } catch (err) {
+      throw err;
+    }
+  },
 
-  updateUser: async (_id, payload) => User.update({ _id }, payload),
-
-  destroyUser: async _id => User.deleteOne({ _id }),
+  updateUser: async (_id, payload) => {
+    try {
+      User.update({ _id }, payload);
+    } catch (err) {
+      throw err;
+    }
+  },
 };
