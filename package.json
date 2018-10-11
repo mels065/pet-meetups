@@ -8,14 +8,14 @@
   "scripts": {
     "start": "node app.js",
     "start:dev": "gulp",
-    "start:dev-server": "gulp dev-server"
+    "start:dev-server": "gulp dev-server",
+    "start:dev-client": "webpack-dev-server --history-api-fallback --inline --progress"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "dotenv": "^6.0.0",
     "express": "^4.16.3",
-    "gulp-react": "^3.1.0",
     "helmet": "^3.13.0",
     "jsonwebtoken": "^8.3.0",
     "lodash": "^4.17.11",
@@ -33,23 +33,24 @@
   "devDependencies": {
     "@babel/core": "^7.1.2",
     "@babel/preset-env": "^7.1.0",
+    "babel-loader": "^8.0.4",
     "browser-sync": "^2.24.7",
+    "copy-webpack-plugin": "^4.5.3",
+    "css-loader": "^1.0.0",
     "eslint": "^5.3.0",
     "eslint-config-airbnb": "^17.1.0",
+    "eslint-loader": "^2.1.1",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.11.0",
-    "gulp": "^3.9.1",
-    "gulp-autoprefixer": "^6.0.0",
-    "gulp-babel": "^8.0.0",
-    "gulp-csso": "^3.0.1",
-    "gulp-eslint": "^5.0.0",
-    "gulp-load-plugins": "^1.5.0",
-    "gulp-nodemon": "^2.2.1",
-    "gulp-sass": "^4.0.1",
-    "gulp-sass-bulk-import": "^1.0.1",
-    "gulp-uglify": "^3.0.1",
-    "gulp-uglifycss": "^1.1.0",
-    "pump": "^3.0.0"
+    "extract-text-webpack-plugin": "^3.0.2",
+    "html-webpack-plugin": "^3.2.0",
+    "pump": "^3.0.0",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "uglifyjs-webpack-plugin": "^2.0.1",
+    "webpack": "^3.0.0",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^2.0.0"
   }
 }
