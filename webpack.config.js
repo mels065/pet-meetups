@@ -28,13 +28,13 @@ const config = {
     rules: [
       {
         test: /\.jsx?$/,
-        exclude: /node_modules/,
-        use: 'eslint-loader',
+        exclude: /app.js|node_modules|src\/server/,
+        use: 'babel-loader',
       },
       {
         test: /\.jsx?$/,
-        exclude: /app.js|node_modules|src\/server/,
-        use: 'babel-loader',
+        exclude: /node_modules/,
+        use: 'eslint-loader',
       },
       {
         test: /\.scss$/,
@@ -60,6 +60,9 @@ const config = {
     port: process.env.CLIENT_PORT || 5000,
   },
   devtool: setDevTool(),
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
 };
 
 if (isProd) {
