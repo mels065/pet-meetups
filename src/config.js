@@ -19,6 +19,24 @@ const VALUES = {
       'DECLINE_TO_ANSWER',
     ],
   },
+  REDUX: {
+    POPUP: {
+      NORMAL: null,
+      LOGIN: 'login',
+      REGISTER: 'register',
+    },
+  },
+};
+
+const ACTIONS = {
+  CURRENT_USER: {
+    FETCH_CURRENT_USER: 'FETCH_CURRENT_USER',
+  },
+  POPUP: {
+    CHANGE_TO_LOGIN: 'CHANGE_TO_LOGIN',
+    CHANGE_TO_REGISTER: 'CHANGE_TO_REGISTER',
+    EXIT_POPUP: 'EXIT_POPUP',
+  },
 };
 
 const BOUNDARIES = {
@@ -84,6 +102,7 @@ const ERROR_MESSAGES = {
 module.exports = {
   ERROR_MESSAGES,
   VALUES,
+  ACTIONS,
   REGEX_PATTERNS,
   BOUNDARIES,
 };
