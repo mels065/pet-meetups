@@ -4,19 +4,38 @@ const jwt = require('jsonwebtoken');
 const AccountController = require('../controller/account');
 const UserController = require('../controller/user');
 
-const { ERROR_MESSAGES } = require('../../config');
+const ERROR_MESSAGES = require('../../constants/error-messages');
 
-module.exports = () => {
+module.exports = (passport) => {
   router.post('/register', async (req, res) => {
     try {
       const { payload } = req.body;
+      const { accountData, userData, repeatedPassword } = payload;
+      const { email, password } = accountData;
+      const { username } = userData;
 
-      const newAccount = await AccountController.createAccount(payload);
-      const newUser = await UserController.getUserById(newAccount.user);
-      const token = jwt.sign(newUser.toJSON(), process.env.JWT_SECRET);
-      res.json({ success: true, token: `JWT ${token}` });
+      if (await AccountController.getAccountByEmail(email)) {
+        return res.json({ success: false, msg: ERROR_MESSAGES.USER.EMAIL.ALREADY_EXISTS });
+      }
+      if (await UserController.getUserByUsername(username)) {
+        return res.json({ success: false, msg: ERROR_MESSAGES.USER.USERNAME.ALREADY_EXISTS });
+      }
+      if (password !== repeatedPassword) {
+        return res.json({ success: false, msg: ERROR_MESSAGES.USER.PASSWORD.NO_MATCH });
+      }
+
+      const newUser = await UserController.createUser(userData);
+      try {
+        await AccountController.createAccount(payload, newUser._id);
+      } catch (err) {
+        newUser.delete();
+        throw err;
+      }
+
+      const token = jwt.sign(newUser._id, process.env.JWT_SECRET);
+      return res.json({ success: true, token: `JWT ${token}` });
     } catch (err) {
-      res.json({ success: false, msg: err.message });
+      return res.json({ success: false, msg: ERROR_MESSAGES.INTERNAL_ERROR });
     }
   });
 
@@ -24,21 +43,35 @@ module.exports = () => {
     try {
       const { payload: { email, password } } = req.body;
 
-      if (!email) throw new Error(ERROR_MESSAGES.USER.EMAIL.NONE_PROVIDED);
-      if (!password) throw new Error(ERROR_MESSAGES.USER.PASSWORD.NONE_PROVIDED);
-
       const account = await AccountController.getAccountByEmail(email);
 
-      if (!account) throw new Error(ERROR_MESSAGES.USER.GENERAL.NOT_FOUND);
+      if (!account) return res.json({ success: false, msg: ERROR_MESSAGES.USER.GENERAL.NOT_FOUND });
+
       if (!account.comparePasswords(password)) {
-        throw new Error(ERROR_MESSAGES.USER.PASSWORD.WRONG_PASSWORD);
+        return res.json({ success: false, msg: ERROR_MESSAGES.USER.password.WRONG_PASSWORD });
       }
 
       const user = await UserController.getUserById(account.user);
       const token = jwt.sign(user.toJSON(), process.env.JWT_SECRET);
-      res.json({ success: true, token: `JWT ${token}` });
+      return res.json({ success: true, token: `JWT ${token}` });
     } catch (err) {
-      res.json({ success: false, msg: err.message });
+      return res.json({ success: false, msg: ERROR_MESSAGES.INTERNAL_ERROR });
+    }
+  });
+
+  router.get('/fetch', passport.authenticate('jwt'), (req, res) => {
+    res.json(res.user);
+  });
+
+  router.post('/destroy', passport.authenticate('jwt'), async (req, res) => {
+    try {
+      const { user } = req;
+      await AccountController.destroyAccount(user._id);
+      await UserController.destroyUser(user._id);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      res.end();
     }
   });
 

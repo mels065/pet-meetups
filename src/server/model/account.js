@@ -3,8 +3,8 @@ const { ObjectId } = require('mongoose').Schema.Types;
 const bcrypt = require('bcryptjs');
 const { isEmail } = require('validator');
 
-const { ERROR_MESSAGES } = require('../../config');
-const { validator } = require('../../utils');
+const ERROR_MESSAGES = require('../../constants/error-messages');
+const validator = require('../../utils/validator');
 
 const AccountSchema = mongoose.Schema({
   email: {

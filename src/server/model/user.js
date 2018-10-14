@@ -6,8 +6,8 @@ const {
   REGEX_PATTERNS,
   VALUES,
   BOUNDARIES,
-} = require('../../config');
-const { validator } = require('../../utils');
+} = require('../../constants');
+const validator = require('../../utils');
 
 const UserSchema = mongoose.Schema({
   username: {

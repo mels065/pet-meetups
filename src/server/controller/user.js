@@ -1,6 +1,13 @@
 const User = require('../model/user');
 
 module.exports = {
+  createUser: async (payload) => {
+    try {
+      return await User.create(payload);
+    } catch (err) {
+      throw err;
+    }
+  },
   getUsers: async () => {
     try {
       return await User.find({});
@@ -32,4 +39,12 @@ module.exports = {
       throw err;
     }
   },
+
+  destroyUser: async (_id) => {
+    try {
+      User.deleteOne({ _id });
+    } catch (err) {
+      throw err;
+    }
+  }
 };

@@ -18,7 +18,7 @@ function setDevTool() {
 }
 
 const config = {
-  entry: path.join(__dirname, '/src/client/js/index.js'),
+  entry: path.join(__dirname, '/src/client/index.js'),
   output: {
     filename: 'bundle.js',
     path: path.join(__dirname, '/dist'),
@@ -49,7 +49,7 @@ const config = {
     ],
   },
   plugins: [
-    new ExtractTextPlugin(path.join(__dirname, '/public/css/main.css')),
+    new ExtractTextPlugin(path.join(__dirname, '/dist/main.css')),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, '/src/client/public/index.html'),
       inject: 'body',

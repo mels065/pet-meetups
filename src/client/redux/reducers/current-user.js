@@ -1,4 +1,4 @@
-import { ACTIONS } from '../../../../config';
+import ACTIONS from '../../../constants/actions';
 
 export default (state = {
   error: null,

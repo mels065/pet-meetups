@@ -1,28 +1,9 @@
 const Account = require('../model/account');
-const User = require('../model/user');
-
-const { accountAndUserErrorHandler } = require('../error-handler');
 
 module.exports = {
-  createAccount: async (payload) => {
+  createAccount: async (payload, user) => {
     try {
-      await accountAndUserErrorHandler(payload);
-
-      const { accountData, userData } = payload;
-
-      const user = new User(userData);
-      await user.save();
-
-      return await new Promise((resolve, reject) => {
-        Account.create({ ...accountData, user: user._id }, async (err, account) => {
-          if (err) {
-            await user.remove();
-            await account.remove();
-            reject(err);
-          }
-          resolve(account);
-        });
-      });
+      return await Account.create({ ...payload, user });
     } catch (err) {
       throw err;
     }
@@ -53,7 +34,6 @@ module.exports = {
   destroyAccount: async (user) => {
     try {
       await Account.deleteOne({ user });
-      await User.deleteOne({ _id: user });
     } catch (err) {
       throw err;
     }

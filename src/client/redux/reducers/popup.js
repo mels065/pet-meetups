@@ -1,4 +1,4 @@
-import { ACTIONS, VALUES } from '../../../../config';
+import { ACTIONS, VALUES } from '../../../constants';
 
 export default (state = {
   display: VALUES.REDUX.POPUP.NORMAL,

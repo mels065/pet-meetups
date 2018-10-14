@@ -3,8 +3,9 @@ const { isEmail, toDate } = require('validator');
 const Account = require('./model/account');
 const User = require('./model/user');
 
-const { ERROR_MESSAGES, BOUNDARIES, REGEX_PATTERNS } = require('../config');
-const { validator } = require('../utils');
+
+const { ERROR_MESSAGES, BOUNDARIES, REGEX_PATTERNS } = require('../constants');
+const validator = require('../utils/validator');
 
 module.exports = {
   accountAndUserErrorHandler: async (payload) => {
