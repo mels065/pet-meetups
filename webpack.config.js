@@ -57,6 +57,7 @@ const config = {
   ],
   devServer: {
     contentBase: path.join(__dirname, '/src/client/public'),
+    historyApiFallback: true,
     port: process.env.CLIENT_PORT || 5000,
   },
   devtool: setDevTool(),
