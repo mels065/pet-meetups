@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Route, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { Route, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 class PrivateRoute extends Component {
   renderPublicComponent() {
@@ -19,7 +20,13 @@ class PrivateRoute extends Component {
   }
 }
 
-export default PrivateRoute;
+export default connect(
+  state => (
+    {
+      currentUser: state.currentUser.user,
+    }
+  ),
+)(PrivateRoute);
 
 PrivateRoute.propTypes = {
   currentUser: PropTypes.shape(),

@@ -7,7 +7,7 @@ const {
   VALUES,
   BOUNDARIES,
 } = require('../../constants');
-const validator = require('../../utils');
+const validator = require('../../utils/validator');
 
 const UserSchema = mongoose.Schema({
   username: {
