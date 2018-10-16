@@ -2,34 +2,30 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import Logo from '../Logo';
-import NavMenu from '../NavMenu';
+import { TITLE } from '../../../../constants/meta';
 
-const NavBar = ({ currentUser }) => (
-  currentUser
+const Hero = ({ currentUser }) => (
+  !currentUser
     ? (
-      <nav>
-        <Logo />
-        <NavMenu />
-      </nav>
+      <div className="hero">
+        <h1>{TITLE}</h1>
+      </div>
     )
     : null
 );
 
-export default NavBar;
-
-connect(
+export default connect(
   props => (
     {
       currentUser: props.currentUser.user,
     }
   ),
-)(NavBar);
+)(Hero);
 
-NavBar.propTypes = {
+Hero.propTypes = {
   currentUser: PropTypes.shape(),
 };
 
-NavBar.defaultProps = {
+Hero.defaultProps = {
   currentUser: null,
 };
