@@ -2,14 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+import NavBar from '../../modules/NavBar';
+
 const Header = ({ currentUser }) => (
   currentUser
     ? (
       <header id="Header">
-        <div className="header-contents" />
+        <NavBar />
       </header>
     )
-    : null
+    : <header id="Header" />
 );
 
 export default connect(

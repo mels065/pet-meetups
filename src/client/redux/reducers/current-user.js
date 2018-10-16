@@ -30,6 +30,14 @@ export default (state = {
         loading: false,
       };
     }
+    case ACTIONS.CURRENT_USER.REMOVE_CURRENT_USER: {
+      return {
+        ...state,
+        user: null,
+        error: null,
+        loading: false,
+      };
+    }
     default: {
       return state;
     }

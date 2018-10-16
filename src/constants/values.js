@@ -24,4 +24,7 @@ module.exports = {
       REGISTER: 'register',
     },
   },
+  LOCAL_STORAGE_KEYS: {
+    TOKEN: 'token',
+  },
 };
