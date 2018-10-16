@@ -2,16 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+import Logo from '../Logo';
 import NavMenu from '../NavMenu';
 
 const NavBar = ({ currentUser }) => (
   currentUser
     ? (
-      <nav className="nav-bar">
-        <div className="logo-content">
-          <img src="" alt="PetMeetups" />
-          <h1>Pet Meetups</h1>
-        </div>
+      <nav>
+        <Logo />
         <NavMenu />
       </nav>
     ) : null
