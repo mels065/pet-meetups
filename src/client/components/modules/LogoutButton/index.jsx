@@ -2,13 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+import PrimaryButton from '../../supermodules/PrimaryButton';
+
 import { removeCurrentUser } from '../../../redux/actions/current-user';
 
 import { LOCAL_STORAGE_KEYS } from '../../../../constants/values';
 
 const LogoutButton = ({ onClick }) => (
   <li className="logout-btn">
-    <button type="button" onClick={onClick}>Logout</button>
+    <PrimaryButton onClick={onClick} text="Logout" />
   </li>
 );
 
