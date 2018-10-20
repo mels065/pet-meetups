@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { TITLE } from '../../../../constants/meta';
+import { TITLE } from '../../../../../constants/meta';
 
 const Logo = () => (
   <div className="logo-content">

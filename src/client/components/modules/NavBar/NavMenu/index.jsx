@@ -1,7 +1,7 @@
 import React from 'react';
 
-import NavMenuLink from '../NavMenuLink';
-import LogoutButton from '../LogoutButton';
+import NavMenuLink from './NavMenuLink';
+import LogoutButton from './LogoutButton';
 
 const NavMenu = () => (
   <div className="nav-menu">

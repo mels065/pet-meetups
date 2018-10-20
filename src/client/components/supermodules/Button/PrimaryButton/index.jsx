@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Button from '../Button';
+import Button from '../index';
 
 const PrimaryButton = ({ text, onClick }) => (
   <Button className="btn-primary" text={text} onClick={onClick} />

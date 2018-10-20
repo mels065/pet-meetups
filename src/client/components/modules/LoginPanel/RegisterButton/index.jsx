@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'redux';
 
-import PrimaryButton from '../../supermodules/PrimaryButton';
+import PrimaryButton from '../../../supermodules/Button/PrimaryButton';
 
-import { changeToRegister } from '../../../redux/actions/popup';
+import { changeToRegister } from '../../../../redux/actions/popup';
 
 const LoginButton = ({ text, onClick }) => (
   <PrimaryButton text={text} onClick={onClick} />

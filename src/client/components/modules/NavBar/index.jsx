@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import Logo from '../Logo';
-import NavMenu from '../NavMenu';
+import Logo from './Logo';
+import NavMenu from './NavMenu';
 
 const NavBar = ({ currentUser }) => (
   currentUser

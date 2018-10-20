@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import PrimaryButton from '../../supermodules/PrimaryButton';
+import PrimaryButton from '../../../../supermodules/Button/PrimaryButton';
 
-import { removeCurrentUser } from '../../../redux/actions/current-user';
+import { removeCurrentUser } from '../../../../../redux/actions/current-user';
 
-import { LOCAL_STORAGE_KEYS } from '../../../../constants/values';
+import { LOCAL_STORAGE_KEYS } from '../../../../../../constants/values';
 
 const LogoutButton = ({ onClick }) => (
   <li className="logout-btn">
